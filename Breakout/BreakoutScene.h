@@ -5,5 +5,10 @@
 class BreakoutScene : public Scene {
 public:
   BreakoutScene(Window& ParentWindow)
-    : Scene{ParentWindow} {}
+    : Scene{ParentWindow} {
+      Load(1);
+    }
+
+private:
+  void Load(int Level);
 };

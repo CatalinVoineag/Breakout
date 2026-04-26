@@ -41,7 +41,7 @@ void PhysicsComponent::ApplyImpulse(
 }
 
 void PhysicsComponent::Tick(float DeltaTime) {
-  ApplyForce(Scene::GRAVITY * Mass);
+  ApplyForce(Gravity * Mass);
   Velocity += Acceleration * DeltaTime;
   SetOwnerPosition(
     GetOwnerPosition() + Velocity * DeltaTime

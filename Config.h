@@ -84,6 +84,11 @@ inline const SDL_Color WINDOW_BACKGROUND{
 }
 #endif
 
+namespace Config::Breakout {
+  // Meters per second
+  inline const float BALL_SPEED{10.f};
+}
+
 namespace Config::Engine {
 inline const std::string WINDOW_TITLE{"Breakout"};
 inline const int WINDOW_WIDTH{720};

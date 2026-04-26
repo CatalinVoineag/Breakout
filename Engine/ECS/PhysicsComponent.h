@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "../Vec2.h"
+#include "../Scene.h"
 
 class PhysicsComponent : public Component {
  public:
@@ -18,6 +19,11 @@ class PhysicsComponent : public Component {
     Velocity = NewVelocity;
   }
 
+  Vec2 GetGravity() const { return Gravity; }
+  void SetGravity(Vec2 NewGravity) {
+    Gravity = NewGravity;
+  }
+
   float GetMass() const { return Mass; }
   void SetMass(float NewMass);
 
@@ -25,4 +31,5 @@ class PhysicsComponent : public Component {
   Vec2 Velocity{0.0, 0.0}; // m/s
   Vec2 Acceleration{0.0, 0.0}; // m/s^2
   float Mass{1.0}; // kg
+  Vec2 Gravity{Scene::GRAVITY};
 };

@@ -19,18 +19,17 @@ add_executable(breakout
   "Engine/ECS/src/InputComponent.cpp"
   "Engine/ECS/src/Commands.cpp"
 
-  # We'll add these later
-  # "breakout/src/BreakoutScene.cpp"
-  # "breakout/src/Ball.cpp"
+  "Breakout/src/BreakoutScene.cpp"
+  "Breakout/src/Ball.cpp"
 )
 
 target_compile_definitions(
   breakout PUBLIC
   WITH_EDITOR
   CHECK_ERRORS
+  DRAW_DEBUG_HELPERS
 
   # We'll use these later
-  # DRAW_DEBUG_HELPERS
   # ENABLE_CHEATS
 )
 
