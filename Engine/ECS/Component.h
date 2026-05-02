@@ -19,7 +19,6 @@ class Component {
   void SetIsEnabled(bool Enabled) {
     isEnabled = Enabled;
   }
-
   bool GetIsEnabled() const {
     return isEnabled;
   }

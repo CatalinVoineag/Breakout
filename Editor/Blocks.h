@@ -1,5 +1,5 @@
 #pragma once
-#include "Actor.h"
+#include "Editor/Actor.h"
 
 #define DECLARE_BLOCK_TYPE(BlockName)               \
 public:                                             \

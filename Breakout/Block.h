@@ -49,8 +49,13 @@ class Block : public Entity {
     }
 
     void HandleCollision(Entity& Other) override {
-      Image->SetIsEnabled(false);
-      Collision->SetIsEnabled(false);
+      if (dynamic_cast<Ball*>(&Other)) {
+        Image->SetIsEnabled(false);
+        Collision->SetIsEnabled(false);
+        SDL_Event E{};
+        E.type = UserEvents::BLOCK_DESTROYED;
+        SDL_PushEvent(&E);
+      }
     }
   private:
     TransformComponent* Transform{nullptr};

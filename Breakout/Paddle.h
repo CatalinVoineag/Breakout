@@ -40,6 +40,7 @@ class Paddle : public Entity {
         CollisionWidth,
         CollisionHeight
       );
+      SetIsPaused(true);
     }
 
     void Tick(float DeltaTime) override {
@@ -56,6 +57,21 @@ class Paddle : public Entity {
         }
         TimerID = SDL_AddTimer(500, &Paddle::EnableCollision, this);
       } 
+    }
+
+    void HandleEvent(const SDL_Event& E) override {
+      if (
+        E.type == SDL_EVENT_KEY_DOWN &&
+        E.key.key == SDLK_SPACE &&
+        GetScene().GetState() == GameState::InProgress
+      ) {
+        SetIsPaused(false);
+      } else if (
+        E.type == UserEvents::GAME_WON ||
+        E.type == UserEvents::GAME_LOST
+      ) {
+        SetIsPaused(true);
+      }
     }
 
     ~Paddle() {
@@ -123,5 +139,10 @@ class Paddle : public Entity {
       }
 
       return 0;
+    }
+
+    void SetIsPaused(bool isPaused) {
+      Input->SetIsEnabled(!isPaused);
+      Physics->SetIsEnabled(!isPaused);
     }
 };

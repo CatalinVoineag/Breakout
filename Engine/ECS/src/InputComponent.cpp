@@ -35,6 +35,7 @@ void InputComponent::Initialize() {
 }
 
 void InputComponent::Tick(float DeltaTime) {
+  if (!GetIsEnabled()) return;
   Entity* Owner{GetOwner()};
   if (!Owner) return;
 
@@ -54,6 +55,8 @@ void InputComponent::Tick(float DeltaTime) {
 
 void InputComponent::HandleEvent(
   const SDL_Event& E) {
+  if (!GetIsEnabled()) return;
+
   if (E.type == SDL_EVENT_KEY_DOWN) {
     Entity* Owner{GetOwner()};
     if (!Owner) return;

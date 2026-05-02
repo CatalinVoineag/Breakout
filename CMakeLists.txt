@@ -2,15 +2,12 @@ cmake_minimum_required(VERSION 3.16)
 set(CMAKE_CXX_STANDARD 20)
 project(breakout VERSION 1.0.0)
 
-add_executable(breakout
-  "main.cpp"
+# Change me to on to enable the editor
+SET(WITH_EDITOR OFF)
 
-  "Editor/src/Button.cpp"
-  "Editor/src/Blocks.cpp"
-  "Editor/src/Actor.cpp"
-  "Editor/src/ActorTooltip.cpp"
-  "Editor/src/Level.cpp"
-  "Engine/src/Scene.cpp"
+set(
+  SOURCE_FILES
+  "main.cpp"
 
   "Engine/ECS/src/Component.cpp"
   "Engine/ECS/src/CollisionComponent.cpp"
@@ -18,20 +15,38 @@ add_executable(breakout
   "Engine/ECS/src/PhysicsComponent.cpp"
   "Engine/ECS/src/InputComponent.cpp"
   "Engine/ECS/src/Commands.cpp"
+  "Engine/src/Scene.cpp"
 
   "Breakout/src/BreakoutScene.cpp"
   "Breakout/src/Ball.cpp"
 )
 
+# Add editor files to the list if WITH_EDITOR is ON
+if (WITH_EDITOR)
+  list(
+    APPEND SOURCE_FILES
+    "Editor/src/Button.cpp"
+    "Editor/src/Blocks.cpp"
+    "Editor/src/Actor.cpp"
+    "Editor/src/ActorTooltip.cpp"
+    "Editor/src/Level.cpp"
+  )
+endif()
+
+add_executable(breakout ${SOURCE_FILES})
+
 target_compile_definitions(
   breakout PUBLIC
+)
+
+if (WITH_EDITOR)
+  target_compile_definitions(breakout PUBLIC
   WITH_EDITOR
   CHECK_ERRORS
   DRAW_DEBUG_HELPERS
-
-  # We'll use these later
-  # ENABLE_CHEATS
-)
+  ENABLE_CHEATS
+  )
+endif()
 
 target_include_directories(
   breakout PUBLIC

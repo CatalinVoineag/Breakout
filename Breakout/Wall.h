@@ -3,6 +3,7 @@
 #include "../Engine/Scene.h"
 #include "../Engine/ECS/TransformComponent.h"
 #include "../Engine/ECS/CollisionComponent.h"
+#include "Ball.h"
 
 enum class WallPosition {
   Top, Bottom, Left, Right
@@ -39,6 +40,14 @@ class Wall : public Entity {
         Collision->SetSize(Thickness, Height);
       }
     }
+
+  void HandleCollision(Entity& Other) override {
+    if (dynamic_cast<Ball*>(&Other) && Position == WallPosition::Bottom) {
+      SDL_Event E{};
+      E.type = UserEvents::GAME_LOST;
+      SDL_PushEvent(&E);
+    }
+  }
 
   private:
     WallPosition Position;

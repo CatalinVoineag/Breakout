@@ -33,6 +33,22 @@ class Ball : public Entity {
         Image->GetWidth(),
         Image->GetHeight()
       );
+      SetIsPaused(true);
+    }
+
+    void HandleEvent(const SDL_Event& E) override {
+      if (
+        E.type == SDL_EVENT_KEY_DOWN &&
+        E.key.key == SDLK_SPACE &&
+        GetScene().GetState() == GameState::InProgress
+      ) {
+        SetIsPaused(false);
+      } else if (
+        E.type == UserEvents::GAME_WON ||
+        E.type == UserEvents::GAME_LOST
+      ) {
+        SetIsPaused(true);
+      }
     }
 
     void HandleCollision(Entity& Other) override;
@@ -42,4 +58,9 @@ class Ball : public Entity {
     ImageComponent* Image;
     CollisionComponent* Collision;
     PhysicsComponent* Physics;
+
+    void SetIsPaused(bool isPaused) {
+      Physics->SetIsEnabled(!isPaused);
+      Collision->SetIsEnabled(!isPaused);
+    }
 };

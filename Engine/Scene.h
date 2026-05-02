@@ -10,6 +10,8 @@
 using EntityPtr = std::unique_ptr<Entity>;
 using EntityPtrs = std::vector<EntityPtr>;
 
+enum class GameState { InProgress, Won, Lost };
+
 class Scene {
 public:
   Scene(Window& ParentWindow);
@@ -17,6 +19,11 @@ public:
   virtual void HandleEvent(const SDL_Event& E);
   virtual void Tick(float DeltaTime);
   virtual void Render(SDL_Surface* Surface);
+
+  GameState GetState() const { return State; }
+  void SetState(GameState NewState) {
+    State = NewState;
+  }
 
   AssetManager& GetAssetManager();
   Window& GetWindow() const;
@@ -40,4 +47,5 @@ protected:
 
 private:
   void CheckCollisions();
+  GameState State{GameState::InProgress};
 };

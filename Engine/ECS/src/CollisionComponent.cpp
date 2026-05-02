@@ -70,7 +70,7 @@ void CollisionComponent::DrawDebugHelpers(
 
   if (!GetIsEnabled()) {
     Color = SDL_MapRGB(Fmt, nullptr, 255, 165, 0);
-  }
+  };
 
   Utilities::DrawRectOutline(
     Surface,

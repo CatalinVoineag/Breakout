@@ -51,4 +51,7 @@ void BreakoutScene::Load(int Level) {
     );
   }
   SDL_CloseIO(Handle);
+  BlocksRemaining = BlockCount;
+  LoadedLevel = Level;
+  SetState(GameState::InProgress);
 }
