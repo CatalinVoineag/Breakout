@@ -16,6 +16,14 @@ class Component {
   virtual void DrawDebugHelpers(SDL_Surface* Surface) {}
   virtual ~Component() = default;
 
+  void SetIsEnabled(bool Enabled) {
+    isEnabled = Enabled;
+  }
+
+  bool GetIsEnabled() const {
+    return isEnabled;
+  }
+
   Entity* GetOwner() const { return Owner; }
   Scene& GetScene() const;
   AssetManager& GetAssetManager() const;
@@ -26,4 +34,5 @@ class Component {
 
 private:
   Entity* Owner{nullptr};
+  bool isEnabled{true};
 };

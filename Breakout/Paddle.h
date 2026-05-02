@@ -6,6 +6,7 @@
 #include "../Engine/ECS/InputComponent.h"
 #include "../Engine/ECS/PhysicsComponent.h"
 #include "BreakoutScene.h"
+#include "Breakout/Ball.h"
 #include "../Config.h"
 
 class Paddle : public Entity {
@@ -46,6 +47,25 @@ class Paddle : public Entity {
       Physics->SetVelocity({0, 0});
     }
 
+    void HandleCollision(Entity& Other) override {
+      if (Ball* Ptr{dynamic_cast<Ball*>(&Other)}) {
+        HandleBallCollision(Ptr);
+        Collision->SetIsEnabled(false);
+        if (TimerID != 0) {
+          SDL_RemoveTimer(TimerID);
+        }
+        TimerID = SDL_AddTimer(500, &Paddle::EnableCollision, this);
+      } 
+    }
+
+    ~Paddle() {
+      if (TimerID) {
+        SDL_RemoveTimer(TimerID);
+      }
+    }
+    Paddle& operator=(const Paddle& Other) = delete;
+    Paddle(const Paddle& Other) = delete;
+
   private:
     TransformComponent* Transform{nullptr};
     InputComponent* Input{nullptr};
@@ -63,5 +83,45 @@ class Paddle : public Entity {
       return std::make_unique<MovementCommand>(
         Vec2{PADDLE_SPEED * Scene::PIXELS_PER_METER, 0.0}
       );
+    }
+
+    void HandleBallCollision(Ball* BallPtr) {
+      Vec2 PaddlePos{Collision->GetCenter()};
+      float PaddleWidth{Collision->GetSize().x};
+
+      CollisionComponent* BallCollision{
+        BallPtr->GetComponent<CollisionComponent>()
+      };
+
+      Vec2 BallPos{BallCollision->GetCenter()};
+      float BallWidth{BallCollision->GetSize().x};
+
+      // Where on the paddle the ball hit from
+      // -1.0 (left edge) to 1.0 (right edge)
+      float HitOffset{
+        (BallPos.x - PaddlePos.x) / (PaddleWidth + BallWidth) / 2
+      };
+
+      float Strength{10.0};
+      Vec2 Direction{HitOffset * Strength, -1.0f};
+
+      PhysicsComponent* BallPhysics{
+        BallPtr->GetComponent<PhysicsComponent>()
+      };
+
+      BallPhysics->SetVelocity(
+        Direction.Normalize() *
+        BallPhysics->GetVelocity().GetLength()
+      );
+    } 
+
+    SDL_TimerID TimerID{0};
+    static Uint32 EnableCollision(void* Entity, SDL_TimerID, Uint32) {
+      Paddle* Target{static_cast<Paddle*>(Entity)};
+      if (Target && Target->Collision) {
+        Target->Collision->SetIsEnabled(true);
+      }
+
+      return 0;
     }
 };

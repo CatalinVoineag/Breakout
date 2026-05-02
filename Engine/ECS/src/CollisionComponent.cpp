@@ -63,10 +63,14 @@ void CollisionComponent::DrawDebugHelpers(
     Utilities::Round(Bounds)
   };
 
+  const auto* Fmt{SDL_GetPixelFormatDetails(Surface->format)};
   Uint32 Color{SDL_MapRGB(
-    SDL_GetPixelFormatDetails(Surface->format),
-    nullptr, 255, 255, 0
+    Fmt, nullptr, 255, 255, 0
   )};
+
+  if (!GetIsEnabled()) {
+    Color = SDL_MapRGB(Fmt, nullptr, 255, 165, 0);
+  }
 
   Utilities::DrawRectOutline(
     Surface,

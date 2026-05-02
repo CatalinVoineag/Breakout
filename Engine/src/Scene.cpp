@@ -63,14 +63,14 @@ void Scene::CheckCollisions() {
     CollisionComponent* ColA{
       Entities[i]
       ->GetComponent<CollisionComponent>()};
-    if (!ColA) { continue; }
+    if (!ColA && ColA->GetIsEnabled()) { continue; }
 
     for (size_t j{i + 1}; j < Entities.size();
          ++j) {
       CollisionComponent* ColB{
         Entities[j]
         ->GetComponent<CollisionComponent>()};
-      if (!ColB) { continue; }
+      if (!ColB && ColB->GetIsEnabled()) { continue; }
 
       if (ColA->IsCollidingWith(*ColB)) {
         Entities[i]->HandleCollision(

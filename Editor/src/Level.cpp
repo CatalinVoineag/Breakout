@@ -174,7 +174,7 @@ std::unordered_map<ActorType, ActorLoaderFunc> ActorLoaders{
 void Level::Load() {
   Actors.clear();
   std::string FileName{
-    Config::BASE_PATH + std::format(
+    std::format(
       "Assets/Level{}.bin", LoadedLevel
     )
   };
@@ -227,7 +227,7 @@ void Level::Load() {
 
 void Level::Save() {
   std::string FileName{
-    Config::BASE_PATH + std::format(
+    std::format(
       "Assets/Level{}.bin", LoadedLevel
     )
   };

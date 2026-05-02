@@ -98,6 +98,7 @@ ImageComponent::ImageComponent(
 void ImageComponent::Render(
   SDL_Surface* Surface
 ) {
+  if (!GetIsEnabled()) return;
   if (!ImageSurface) return;
 
   auto [TargetX, TargetY]{GetOwnerPosition() + Offset};
@@ -131,6 +132,7 @@ void ImageComponent::DrawDebugHelpers(
   SDL_Surface* Surface
 ) {
   using Utilities::DrawRectOutline;
+  if (!GetIsEnabled()) return;
   if (!ImageSurface) return;
 
   // Calculate position and dimensions, similar to Render()
