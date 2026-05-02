@@ -7,6 +7,15 @@ class CollisionComponent : public Component {
  public:
   using Component::Component;
 
+  Vec2 GetSize() const { return {Width, Height}; }
+  Vec2 GetCenter() const {
+    const auto& [x, y, w, h]{GetBounds()};
+    return {
+      x + w / 2,
+      y + h / 2,
+    };
+  }
+
   void SetOffset(const Vec2& NewOffset);
   void SetSize(float NewWidth, float NewHeight);
 

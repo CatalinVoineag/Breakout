@@ -32,6 +32,11 @@ class InputComponent : public Component {
     KeyHeldBindings[Key] = Factory;
   }
 
+  void UnbindKey(SDL_Keycode Key) {
+    KeyDownBindings.erase(Key);
+    KeyHeldBindings.erase(Key);
+  }
+
 private:
   // Map for discrete key presses (events)
   KeyToFactoryMap KeyDownBindings;

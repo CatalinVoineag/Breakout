@@ -63,15 +63,25 @@ void CollisionComponent::DrawDebugHelpers(
     Utilities::Round(Bounds)
   };
 
+  Uint32 Color{SDL_MapRGB(
+    SDL_GetPixelFormatDetails(Surface->format),
+    nullptr, 255, 255, 0
+  )};
+
   Utilities::DrawRectOutline(
     Surface,
     ScreenBounds,
-    SDL_MapRGB(
-      SDL_GetPixelFormatDetails(Surface->format),
-      nullptr, 255, 255, 0),
+    Color,
     1
   );
+
+  auto [cx, cy]{GetCenter()};
+  SDL_Rect CenterRect{Utilities::Round({
+    cx - 3, cy - 3, 6, 6
+  })};
+  SDL_FillSurfaceRect(Surface, &CenterRect, Color);
 }
+
 
 bool CollisionComponent::GetCollisionRectangle(
   const CollisionComponent& Other,

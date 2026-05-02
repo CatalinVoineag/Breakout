@@ -27,9 +27,18 @@ class PhysicsComponent : public Component {
   float GetMass() const { return Mass; }
   void SetMass(float NewMass);
 
+  void ConstrainHorizontalMovement(float Left, float Right) {
+    ShouldConstrainHorizontalMovement = true;
+    ConstrainLeft = Left;
+    ConstrainRight = Right;
+  }
+
  private:
   Vec2 Velocity{0.0, 0.0}; // m/s
   Vec2 Acceleration{0.0, 0.0}; // m/s^2
   float Mass{1.0}; // kg
   Vec2 Gravity{Scene::GRAVITY};
+  bool ShouldConstrainHorizontalMovement{false};
+  float ConstrainLeft{0.0f};
+  float ConstrainRight{0.0f};
 };

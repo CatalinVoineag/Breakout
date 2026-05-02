@@ -48,6 +48,15 @@ void PhysicsComponent::Tick(float DeltaTime) {
   );
 
   Acceleration = {0.0, 0.0};
+
+  if (ShouldConstrainHorizontalMovement) {
+    auto [x, y]{GetOwnerPosition()};
+    if (x < ConstrainLeft) {
+      SetOwnerPosition({ConstrainLeft, y});
+    } else if (x > ConstrainRight) {
+      SetOwnerPosition({ConstrainRight, y});
+    }
+  }
 }
 
 void PhysicsComponent::DrawDebugHelpers(

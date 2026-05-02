@@ -87,6 +87,7 @@ inline const SDL_Color WINDOW_BACKGROUND{
 namespace Config::Breakout {
   // Meters per second
   inline const float BALL_SPEED{10.f};
+  inline const float PADDLE_SPEED{5};
 }
 
 namespace Config::Engine {
