@@ -19,11 +19,11 @@ class Block : public Entity {
       Uint8 GridCol{0};
       SDL_ReadU8(Handle, &GridCol);
 
-      std::cout << std::format(
-        "Loaded type {}, block (Row={}, Col={})\n",
-        Type, GridRow, GridCol
-      );
-
+      // std::cout << std::format(
+      //   "Loaded type {}, block (Row={}, Col={})\n",
+      //   Type, GridRow, GridCol
+      // );
+      //
       if (static_cast<Config::ActorType>(Type) == Config::ActorType::GreenBlock) {
         SDL_SeekIO(Handle, 2, SDL_IO_SEEK_CUR);
         Uint32 ArraySize{0};

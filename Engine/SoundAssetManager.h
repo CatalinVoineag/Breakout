@@ -29,11 +29,11 @@ class SoundAssetManager {
     AudioCacheStruct AudioStruct{};
 
     if (AudioCache.contains(Path)) {
-      std::cout << "CACHE HIT: " << Path << '\n';
+      // std::cout << "CACHE HIT: " << Path << '\n';
       return AudioCache.at(Path);
     }
 
-    std::cout << "CACHE MISS: " << Path << '\n';
+    // std::cout << "CACHE MISS: " << Path << '\n';
 
     if (!SDL_LoadWAV(Path.c_str(), &AudioStruct.wave_spec, &AudioStruct.wav_data, &AudioStruct.wav_len)) {
       std::cerr << "Audio wave failed to load: "

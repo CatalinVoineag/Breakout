@@ -28,6 +28,10 @@ class SoundComponent : public Component {
       }
     }
 
+    bool IsPlaying() const {
+      return SDL_GetAudioStreamQueued(waveStream) > 0;
+    }
+
     ~SoundComponent() {
       SDL_DestroyAudioStream(waveStream);
     }
