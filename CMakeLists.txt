@@ -12,6 +12,7 @@ set(
   "Engine/ECS/src/Component.cpp"
   "Engine/ECS/src/CollisionComponent.cpp"
   "Engine/ECS/src/ImageComponent.cpp"
+  "Engine/ECS/src/SoundComponent.cpp"
   "Engine/ECS/src/PhysicsComponent.cpp"
   "Engine/ECS/src/InputComponent.cpp"
   "Engine/ECS/src/Commands.cpp"

@@ -4,6 +4,7 @@
 class Entity;
 class Scene;
 class AssetManager;
+class SoundAssetManager;
 struct Vec2;
 
 class Component {
@@ -26,6 +27,7 @@ class Component {
   Entity* GetOwner() const { return Owner; }
   Scene& GetScene() const;
   AssetManager& GetAssetManager() const;
+  SoundAssetManager& GetSoundAssetManager() const;
   Vec2 GetOwnerPosition() const;
   void SetOwnerPosition(const Vec2& Pos) const;
 

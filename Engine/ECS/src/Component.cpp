@@ -12,6 +12,10 @@ AssetManager& Component::GetAssetManager() const {
   return GetScene().GetAssetManager();
 }
 
+SoundAssetManager& Component::GetSoundAssetManager() const {
+  return GetScene().GetSoundAssetManager();
+}
+
 Vec2 Component::GetOwnerPosition() const {
   TransformComponent* Transform{
     GetOwner()->GetComponent<TransformComponent>()

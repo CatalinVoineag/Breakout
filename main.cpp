@@ -12,7 +12,7 @@
 #endif
 
 int main(int argc, char** argv) {
-  if (!SDL_Init(SDL_INIT_VIDEO)) {
+   if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
     CheckSDLError("SDL_Init");
     return 1;
   }
@@ -46,6 +46,7 @@ int main(int argc, char** argv) {
         E.type == SDL_EVENT_QUIT ||
         E.type == SDL_EVENT_WINDOW_CLOSE_REQUESTED
       ) {
+        GameScene.Cleanup();
         TTF_Quit();
         SDL_Quit();
         return 0;

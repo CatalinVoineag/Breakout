@@ -22,11 +22,9 @@ class AssetManager {
   // Load a surface, reusing if already loaded
   SurfacePtr LoadSurface(const std::string& Path) {
     if (SurfaceCache.contains(Path)) {
-      std::cout << "CACHE HIT: " << Path << '\n';
       return SurfaceCache[Path];
     }
 
-    std::cout << "CACHE MISS: " << Path << '\n';
     SDL_Surface* Surface{IMG_Load(Path.c_str())};
     if (!Surface) {
       std::cerr << "AssetManager failed to load: "

@@ -6,6 +6,7 @@ void Ball::HandleCollision(Entity& Other) {
   if (dynamic_cast<Paddle*>(&Other)) {
     return;
   }
+  Sound->Play();
   SDL_FRect Intersection;
   Collision->GetCollisionRectangle(
     *Other.GetComponent<CollisionComponent>(),

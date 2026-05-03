@@ -4,6 +4,7 @@
 #include <memory>
 #include "ECS/Entity.h"
 #include "AssetManager.h"
+#include "SoundAssetManager.h"
 #include "Window.h"
 #include "../Config.h"
 
@@ -26,10 +27,15 @@ public:
   }
 
   AssetManager& GetAssetManager();
+  SoundAssetManager& GetSoundAssetManager();
   Window& GetWindow() const;
 
   float GetWidth() const;
   float GetHeight() const;
+
+  void Cleanup() {
+    Entities.clear();
+  }
 
 #ifdef DRAW_DEBUG_HELPERS
   SDL_Surface* Trajectories{nullptr};
@@ -41,9 +47,10 @@ public:
   };
 
 protected:
-  EntityPtrs Entities;
+  SoundAssetManager SoundAssets;
   Window& ParentWindow;
   AssetManager Assets;
+  EntityPtrs Entities;
 
 private:
   void CheckCollisions();

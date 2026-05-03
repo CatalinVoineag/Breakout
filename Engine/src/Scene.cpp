@@ -44,6 +44,10 @@ AssetManager& Scene::GetAssetManager() {
   return Assets;
 }
 
+SoundAssetManager& Scene::GetSoundAssetManager() {
+  return SoundAssets;
+}
+
 Window& Scene::GetWindow() const {
   return ParentWindow;
 }
