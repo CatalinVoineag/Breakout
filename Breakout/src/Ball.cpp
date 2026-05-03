@@ -1,12 +1,15 @@
 #include "../Ball.h"
 #include "../../Engine/Vec2.h"
 #include "../Paddle.h"
+#include "../Block.h"
 
 void Ball::HandleCollision(Entity& Other) {
+  if (!dynamic_cast<Block*>(&Other)) {
+    Sound->Play();
+  }
   if (dynamic_cast<Paddle*>(&Other)) {
     return;
   }
-  Sound->Play();
   SDL_FRect Intersection;
   Collision->GetCollisionRectangle(
     *Other.GetComponent<CollisionComponent>(),

@@ -46,10 +46,13 @@ class Block : public Entity {
       );
       Image->SetWidth(Width);
       Image->SetHeight(Height);
+
+      HitSound = AddComponent<SoundComponent>("Assets/brick_collision.wav");
     }
 
     void HandleCollision(Entity& Other) override {
       if (dynamic_cast<Ball*>(&Other)) {
+        HitSound->Play();
         Image->SetIsEnabled(false);
         Collision->SetIsEnabled(false);
         SDL_Event E{};
@@ -61,6 +64,7 @@ class Block : public Entity {
     TransformComponent* Transform{nullptr};
     ImageComponent* Image{nullptr};
     CollisionComponent* Collision{nullptr};
+    SoundComponent* HitSound{nullptr};
     using ImageMap = std::unordered_map<Config::ActorType, std::string>;
     using enum Config::ActorType;
     inline static ImageMap Images {
