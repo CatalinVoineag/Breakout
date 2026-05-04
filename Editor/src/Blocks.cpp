@@ -58,3 +58,31 @@ StrongRedBlock::StrongRedBlock(
     ParentScene,
     SDL_Rect{Rect.x, Rect.y, WIDTH, HEIGHT},
     ParentScene.GetAssets().StrongRedBlock} {}
+
+CrackedYellowBlock::CrackedYellowBlock(
+  Scene& ParentScene, SDL_Rect Rect)
+  : Actor{
+    ParentScene,
+    SDL_Rect{Rect.x, Rect.y, WIDTH, HEIGHT},
+    ParentScene.GetAssets().CrackedYellowBlock} {}
+
+CrackedRedBlock::CrackedRedBlock(
+  Scene& ParentScene, SDL_Rect Rect)
+  : Actor{
+    ParentScene,
+    SDL_Rect{Rect.x, Rect.y, WIDTH, HEIGHT},
+    ParentScene.GetAssets().CrackedRedBlock} {}
+
+TNTRedBlock::TNTRedBlock(
+  Scene& ParentScene, SDL_Rect Rect)
+  : Actor{
+    ParentScene,
+    SDL_Rect{Rect.x, Rect.y, WIDTH, HEIGHT},
+    ParentScene.GetAssets().TNTRedBlock} {}
+
+TNTBlueBlock::TNTBlueBlock(
+  Scene& ParentScene, SDL_Rect Rect)
+  : Actor{
+    ParentScene,
+    SDL_Rect{Rect.x, Rect.y, WIDTH, HEIGHT},
+    ParentScene.GetAssets().TNTBlueBlock} {}

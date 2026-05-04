@@ -30,6 +30,10 @@ enum class ActorType : Uint8 {
   YellowBlock = 6,
   StrongYellowBlock = 7,
   StrongRedBlock = 8,
+  CrackedYellowBlock = 9,
+  CrackedRedBlock = 10,
+  TNTRedBlock = 11,
+  TNTBlueBlock = 12,
 };
 
 inline const std::vector BUTTON_COLORS{

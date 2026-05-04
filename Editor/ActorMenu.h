@@ -92,6 +92,28 @@ class ActorMenu {
         }
       )
     );
+
+    Actors.emplace_back(
+      std::make_unique<TNTRedBlock>(
+        GetScene(),
+        SDL_Rect{
+          ACTOR_MENU_POSITION_X + PADDING,
+          BlueBlock::HEIGHT * 7 + PADDING * 8,
+          0, 0
+        }
+      )
+    );
+
+    Actors.emplace_back(
+      std::make_unique<TNTBlueBlock>(
+        GetScene(),
+        SDL_Rect{
+          ACTOR_MENU_POSITION_X + PADDING,
+          BlueBlock::HEIGHT * 8 + PADDING * 8,
+          0, 0
+        }
+      )
+    );
   }
 
   void HandleEvent(const SDL_Event& E) {
