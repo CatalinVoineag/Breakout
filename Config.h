@@ -28,6 +28,8 @@ enum class ActorType : Uint8 {
   OrangeBlock = 4,
   RedBlock = 5,
   YellowBlock = 6,
+  StrongYellowBlock = 7,
+  StrongRedBlock = 8,
 };
 
 inline const std::vector BUTTON_COLORS{
@@ -81,7 +83,7 @@ inline const std::string WINDOW_TITLE{"Editor"};
 inline const int WINDOW_WIDTH{
   LEVEL_WIDTH + ACTOR_MENU_WIDTH
 };
-inline const int WINDOW_HEIGHT{LEVEL_HEIGHT + 50};
+inline const int WINDOW_HEIGHT{LEVEL_HEIGHT + 250};
 inline const SDL_Color WINDOW_BACKGROUND{
   35, 35, 35, 255
 };

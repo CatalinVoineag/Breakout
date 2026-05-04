@@ -70,6 +70,28 @@ class ActorMenu {
         }
       )
     );
+
+    Actors.emplace_back(
+      std::make_unique<StrongYellowBlock>(
+        GetScene(),
+        SDL_Rect{
+          ACTOR_MENU_POSITION_X + PADDING,
+          BlueBlock::HEIGHT * 5 + PADDING * 6,
+          0, 0
+        }
+      )
+    );
+
+    Actors.emplace_back(
+      std::make_unique<StrongRedBlock>(
+        GetScene(),
+        SDL_Rect{
+          ACTOR_MENU_POSITION_X + PADDING,
+          BlueBlock::HEIGHT * 6 + PADDING * 7,
+          0, 0
+        }
+      )
+    );
   }
 
   void HandleEvent(const SDL_Event& E) {

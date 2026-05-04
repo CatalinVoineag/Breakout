@@ -44,7 +44,7 @@ if (WITH_EDITOR)
   target_compile_definitions(breakout PUBLIC
   WITH_EDITOR
   CHECK_ERRORS
-  DRAW_DEBUG_HELPERS
+  # DRAW_DEBUG_HELPERS
   ENABLE_CHEATS
   )
 endif()

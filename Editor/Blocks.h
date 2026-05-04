@@ -100,4 +100,16 @@ public:
     return NewActor;
   }
 };
+
+class StrongYellowBlock : public Actor {
+public:
+  DECLARE_BLOCK_TYPE(StrongYellowBlock)
+  DEFAULT_BLOCK_CONSTRUCT(StrongYellowBlock)
+};
+
+class StrongRedBlock : public Actor {
+public:
+  DECLARE_BLOCK_TYPE(StrongRedBlock)
+  DEFAULT_BLOCK_CONSTRUCT(StrongRedBlock)
+};
 }

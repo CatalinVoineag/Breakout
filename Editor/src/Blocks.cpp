@@ -44,3 +44,17 @@ YellowBlock::YellowBlock(
     ParentScene,
     SDL_Rect{Rect.x, Rect.y, WIDTH, HEIGHT},
     ParentScene.GetAssets().YellowBlock} {}
+
+StrongYellowBlock::StrongYellowBlock(
+  Scene& ParentScene, SDL_Rect Rect)
+  : Actor{
+    ParentScene,
+    SDL_Rect{Rect.x, Rect.y, WIDTH, HEIGHT},
+    ParentScene.GetAssets().StrongYellowBlock} {}
+
+StrongRedBlock::StrongRedBlock(
+  Scene& ParentScene, SDL_Rect Rect)
+  : Actor{
+    ParentScene,
+    SDL_Rect{Rect.x, Rect.y, WIDTH, HEIGHT},
+    ParentScene.GetAssets().StrongRedBlock} {}
