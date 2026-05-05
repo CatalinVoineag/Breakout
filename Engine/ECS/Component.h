@@ -13,7 +13,7 @@ class Component {
   virtual void Initialize() {}
   virtual void HandleEvent(const SDL_Event& E) {}
   virtual void Tick(float DeltaTime) {}
-  virtual void Render(SDL_Surface* Surface) {}
+  virtual void Render(SDL_Surface* Surface, float DeltaTime) {}
   virtual void DrawDebugHelpers(SDL_Surface* Surface) {}
   virtual ~Component() = default;
 

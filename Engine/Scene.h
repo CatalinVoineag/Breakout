@@ -19,7 +19,7 @@ public:
 
   virtual void HandleEvent(const SDL_Event& E);
   virtual void Tick(float DeltaTime);
-  virtual void Render(SDL_Surface* Surface);
+  virtual void Render(SDL_Surface* Surface, float DeltaTime);
 
   GameState GetState() const { return State; }
   void SetState(GameState NewState) {

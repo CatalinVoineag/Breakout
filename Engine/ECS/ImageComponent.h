@@ -19,7 +19,7 @@ class ImageComponent : public Component {
   );
 
   void Initialize() override;
-  void Render(SDL_Surface* Surface) override;
+  void Render(SDL_Surface* Surface, float DeltaTime) override;
   void DrawDebugHelpers(SDL_Surface*) override;
   bool LoadNewImage(const std::string& NewPath);
 

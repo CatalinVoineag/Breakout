@@ -42,7 +42,7 @@ public:
     }
   }
 
-  void Render(SDL_Surface* Surface) {
+  void Render(SDL_Surface* Surface, float DeltaTime) {
     const auto* Fmt{SDL_GetPixelFormatDetails(Surface->format)};
 
     if (GetState() == GameState::Won) {
@@ -56,7 +56,7 @@ public:
         SDL_MapRGB(Fmt, nullptr, 50, 0, 0)
       );
     }
-    Scene::Render(Surface);
+    Scene::Render(Surface, DeltaTime);
   }
 
   void Tick(float DeltaTime) override {

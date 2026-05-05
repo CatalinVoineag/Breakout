@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 20)
 project(breakout VERSION 1.0.0)
 
 # Change me to on to enable the editor
-SET(WITH_EDITOR ON)
+SET(WITH_EDITOR OFF)
 
 set(
   SOURCE_FILES
@@ -13,6 +13,7 @@ set(
   "Engine/ECS/src/CollisionComponent.cpp"
   "Engine/ECS/src/ImageComponent.cpp"
   "Engine/ECS/src/SoundComponent.cpp"
+  "Engine/ECS/src/AnimationComponent.cpp"
   "Engine/ECS/src/PhysicsComponent.cpp"
   "Engine/ECS/src/InputComponent.cpp"
   "Engine/ECS/src/Commands.cpp"

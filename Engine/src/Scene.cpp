@@ -26,9 +26,9 @@ void Scene::Tick(float DeltaTime) {
   CheckCollisions();
 }
 
-void Scene::Render(SDL_Surface* Surface) {
+void Scene::Render(SDL_Surface* Surface, float DeltaTime) {
   for (EntityPtr& Entity : Entities) {
-    Entity->Render(Surface);
+    Entity->Render(Surface, DeltaTime);
   }
 
 #ifdef DRAW_DEBUG_HELPERS

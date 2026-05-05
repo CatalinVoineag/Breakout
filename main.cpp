@@ -69,7 +69,7 @@ int main(int argc, char** argv) {
 
     GameScene.Tick(DeltaTime);
     GameWindow.Render();
-    GameScene.Render(GameWindow.GetSurface());
+    GameScene.Render(GameWindow.GetSurface(), DeltaTime);
     GameWindow.Update();
   }
 
