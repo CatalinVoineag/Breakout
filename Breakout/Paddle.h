@@ -41,9 +41,6 @@ class Paddle : public Entity {
         CollisionWidth,
         CollisionHeight
       );
-      // ExplosionAnimation = AddComponent<AnimationComponent>(
-      //   "Assets/explosion.png", 13
-      // );
 
       SetIsPaused(true);
     }
@@ -76,8 +73,6 @@ class Paddle : public Entity {
         E.type == UserEvents::GAME_LOST
       ) {
         SetIsPaused(true);
-      } else if (E.type == UserEvents::BLOCK_DESTROYED) {
-        // ExplosionAnimation->Play=true;
       }
     }
 
@@ -94,7 +89,6 @@ class Paddle : public Entity {
     InputComponent* Input{nullptr};
     PhysicsComponent* Physics{nullptr};
     CollisionComponent* Collision{nullptr};
-    AnimationComponent* ExplosionAnimation{nullptr};
 
     static CommandPtr CreateMoveLeftCommand() {
       using namespace Config::Breakout;

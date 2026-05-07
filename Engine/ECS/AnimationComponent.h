@@ -9,11 +9,6 @@
 #include "../AssetManager.h"
 #include "../Vec2.h"
 
-// Put this somewhere else?
-enum class AnimationScalingMode {
-  None, Fill, Contain, Cover
-};
-
 class AnimationComponent : public Component {
   public:
     using Component::Component;
@@ -32,8 +27,6 @@ class AnimationComponent : public Component {
     int GetSurfaceHeight() const;
     float GetWidth() const;
     float GetHeight() const;
-    // void SetScalingMode(ScalingMode Mode);
-
     bool Play{false};
 
   private:
