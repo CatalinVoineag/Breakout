@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include "../Engine/Scene.h"
+#include "../Engine/ECS/SoundComponent.h"
 
 class BreakoutScene : public Scene {
 public:
@@ -15,7 +16,10 @@ public:
     if (E.type == BLOCK_DESTROYED) {
       --BlocksRemaining;
       if (BlocksRemaining == 0) {
-        CompleteLevel();
+        WinSound->Play();
+        SDL_Event WonEvent{};
+        WonEvent.type = UserEvents::GAME_WON;
+        SDL_PushEvent(&WonEvent);
       }
     }
 
@@ -28,6 +32,8 @@ public:
       Load(E.user.code);
     } else if (E.type == GAME_WON) {
       SetState(GameState::Won);
+    } else if (E.type == COMPLETE_LEVEL) {
+      CompleteLevel();
     } else if (E.type == GAME_LOST) {
       SetState(GameState::Lost);
     } else if (E.type == SDL_EVENT_KEY_DOWN && E.key.key == SDLK_R) {
@@ -36,7 +42,7 @@ public:
     }
   }
 
-  void Render(SDL_Surface* Surface) {
+  void Render(SDL_Surface* Surface, float DeltaTime) {
     const auto* Fmt{SDL_GetPixelFormatDetails(Surface->format)};
 
     if (GetState() == GameState::Won) {
@@ -50,13 +56,25 @@ public:
         SDL_MapRGB(Fmt, nullptr, 50, 0, 0)
       );
     }
-    Scene::Render(Surface);
+    Scene::Render(Surface, DeltaTime);
+  }
+
+  void Tick(float DeltaTime) override {
+    if (BlocksRemaining == 0 && !WinSound->IsPlaying()) {
+      SDL_Event WonEvent{};
+      WonEvent.type = UserEvents::COMPLETE_LEVEL;
+      SDL_PushEvent(&WonEvent);
+    }
+
+    Scene::Tick(DeltaTime);
   }
 
 private:
   int BlocksRemaining{0};
   int LoadedLevel{1};
   void Load(int Level);
+  SoundComponent* WinSound{nullptr};
+  std::unique_ptr<Entity> SoundEntity;
 
   void CompleteLevel() {
     if (LoadedLevel == 3) {

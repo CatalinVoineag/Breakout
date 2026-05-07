@@ -168,7 +168,13 @@ std::unordered_map<ActorType, ActorLoaderFunc> ActorLoaders{
   {CyanBlock, CyanBlock::Construct},
   {OrangeBlock, OrangeBlock::Construct},
   {RedBlock, RedBlock::Construct},
-  {YellowBlock, YellowBlock::Construct}};
+  {YellowBlock, YellowBlock::Construct},
+  {StrongYellowBlock, StrongYellowBlock::Construct},
+  {StrongRedBlock, StrongRedBlock::Construct},
+  {CrackedYellowBlock, CrackedYellowBlock::Construct},
+  {CrackedRedBlock, CrackedRedBlock::Construct},
+  {TNTRedBlock, TNTRedBlock::Construct},
+  {TNTBlueBlock, TNTBlueBlock::Construct}};
 }
 
 void Level::Load() {
@@ -199,11 +205,11 @@ void Level::Load() {
   Uint32 ActorCount{0};
   SDL_ReadU32LE(Handle, &ActorCount);
 
-  std::cout << std::format( "Loading a version "
-    "{} level ({}x{}) with {} actors\n",
-    FileVersion, GridWidth,
-    GridHeight, ActorCount
-  );
+  // std::cout << std::format( "Loading a version "
+  //   "{} level ({}x{}) with {} actors\n",
+  //   FileVersion, GridWidth,
+  //   GridHeight, ActorCount
+  // );
 
   for (size_t i{0}; i < ActorCount; ++i) {
     Uint8 Type{0};

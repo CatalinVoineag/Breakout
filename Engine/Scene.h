@@ -4,6 +4,7 @@
 #include <memory>
 #include "ECS/Entity.h"
 #include "AssetManager.h"
+#include "SoundAssetManager.h"
 #include "Window.h"
 #include "../Config.h"
 
@@ -18,7 +19,7 @@ public:
 
   virtual void HandleEvent(const SDL_Event& E);
   virtual void Tick(float DeltaTime);
-  virtual void Render(SDL_Surface* Surface);
+  virtual void Render(SDL_Surface* Surface, float DeltaTime);
 
   GameState GetState() const { return State; }
   void SetState(GameState NewState) {
@@ -26,10 +27,15 @@ public:
   }
 
   AssetManager& GetAssetManager();
+  SoundAssetManager& GetSoundAssetManager();
   Window& GetWindow() const;
 
   float GetWidth() const;
   float GetHeight() const;
+
+  void Cleanup() {
+    Entities.clear();
+  }
 
 #ifdef DRAW_DEBUG_HELPERS
   SDL_Surface* Trajectories{nullptr};
@@ -41,9 +47,10 @@ public:
   };
 
 protected:
-  EntityPtrs Entities;
+  SoundAssetManager SoundAssets;
   Window& ParentWindow;
   AssetManager Assets;
+  EntityPtrs Entities;
 
 private:
   void CheckCollisions();

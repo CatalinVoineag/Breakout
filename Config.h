@@ -13,8 +13,10 @@ inline Uint32 SAVE_AND_PLAY_LEVEL{SDL_RegisterEvents(1)};
 inline Uint32 LEVEL_EDIT{SDL_RegisterEvents(1)};
 #endif
 inline Uint32 BLOCK_DESTROYED{SDL_RegisterEvents(1)};
+inline Uint32 BLOCK_EXPLODED{SDL_RegisterEvents(1)};
 inline Uint32 GAME_WON{SDL_RegisterEvents(1)};
 inline Uint32 GAME_LOST{SDL_RegisterEvents(1)};
+inline Uint32 COMPLETE_LEVEL{SDL_RegisterEvents(1)};
 inline Uint32 LAUNCH_LEVEL{SDL_RegisterEvents(1)};
 }
 
@@ -27,6 +29,12 @@ enum class ActorType : Uint8 {
   OrangeBlock = 4,
   RedBlock = 5,
   YellowBlock = 6,
+  StrongYellowBlock = 7,
+  StrongRedBlock = 8,
+  CrackedYellowBlock = 9,
+  CrackedRedBlock = 10,
+  TNTRedBlock = 11,
+  TNTBlueBlock = 12,
 };
 
 inline const std::vector BUTTON_COLORS{
@@ -80,7 +88,7 @@ inline const std::string WINDOW_TITLE{"Editor"};
 inline const int WINDOW_WIDTH{
   LEVEL_WIDTH + ACTOR_MENU_WIDTH
 };
-inline const int WINDOW_HEIGHT{LEVEL_HEIGHT + 50};
+inline const int WINDOW_HEIGHT{LEVEL_HEIGHT + 250};
 inline const SDL_Color WINDOW_BACKGROUND{
   35, 35, 35, 255
 };

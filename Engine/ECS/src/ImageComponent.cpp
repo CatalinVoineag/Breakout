@@ -95,9 +95,7 @@ ImageComponent::ImageComponent(
     .LoadSurface(ImageFilePath);
 }
 
-void ImageComponent::Render(
-  SDL_Surface* Surface
-) {
+void ImageComponent::Render(SDL_Surface* Surface, float DeltaTime) {
   if (!GetIsEnabled()) return;
   if (!ImageSurface) return;
 

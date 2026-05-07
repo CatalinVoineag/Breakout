@@ -1,6 +1,7 @@
 #pragma once
 #include "../Engine/ECS/Entity.h"
 #include "../Engine/ECS/ImageComponent.h"
+#include "../Engine/ECS/SoundComponent.h"
 #include "../Engine/ECS/CollisionComponent.h"
 #include "../Engine/ECS/TransformComponent.h"
 #include "../Engine/ECS/PhysicsComponent.h"
@@ -33,6 +34,8 @@ class Ball : public Entity {
         Image->GetWidth(),
         Image->GetHeight()
       );
+      Sound = AddComponent<SoundComponent>("Assets/ball_collision.wav");
+
       SetIsPaused(true);
     }
 
@@ -58,6 +61,7 @@ class Ball : public Entity {
     ImageComponent* Image;
     CollisionComponent* Collision;
     PhysicsComponent* Physics;
+    SoundComponent* Sound;
 
     void SetIsPaused(bool isPaused) {
       Physics->SetIsEnabled(!isPaused);

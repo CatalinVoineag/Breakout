@@ -9,5 +9,11 @@ struct AssetManager {
   Image OrangeBlock{"Assets/Brick_Orange_A.png"};
   Image RedBlock{"Assets/Brick_Red_A.png"};
   Image YellowBlock{"Assets/Brick_Yellow_A.png" };
+  Image StrongYellowBlock{"Assets/Strong_Brick_Yellow.png" };
+  Image StrongRedBlock{"Assets/Strong_Brick_Red.png" };
+  Image CrackedYellowBlock{"Assets/Cracked_Brick_Yellow.png" };
+  Image CrackedRedBlock{"Assets/Cracked_Brick_Red.png" };
+  Image TNTRedBlock{"Assets/TNT_Brick_Red.png" };
+  Image TNTBlueBlock{"Assets/TNT_Brick_Blue.png"};
 };
 }

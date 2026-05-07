@@ -5,6 +5,7 @@
 #include "../Engine/ECS/CollisionComponent.h"
 #include "../Engine/ECS/InputComponent.h"
 #include "../Engine/ECS/PhysicsComponent.h"
+#include "../Engine/ECS/AnimationComponent.h"
 #include "BreakoutScene.h"
 #include "Breakout/Ball.h"
 #include "../Config.h"
@@ -40,6 +41,7 @@ class Paddle : public Entity {
         CollisionWidth,
         CollisionHeight
       );
+
       SetIsPaused(true);
     }
 

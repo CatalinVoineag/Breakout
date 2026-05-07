@@ -28,9 +28,9 @@ public:
     }
   }
 
-  virtual void Render(SDL_Surface* Surface) {
+  virtual void Render(SDL_Surface* Surface, float DeltaTime) {
     for (ComponentPtr& C : Components) {
-      C->Render(Surface);
+      C->Render(Surface, DeltaTime);
     }
 #ifdef DRAW_DEBUG_HELPERS
     for (ComponentPtr& C : Components) {

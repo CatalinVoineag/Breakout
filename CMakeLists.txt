@@ -12,6 +12,8 @@ set(
   "Engine/ECS/src/Component.cpp"
   "Engine/ECS/src/CollisionComponent.cpp"
   "Engine/ECS/src/ImageComponent.cpp"
+  "Engine/ECS/src/SoundComponent.cpp"
+  "Engine/ECS/src/AnimationComponent.cpp"
   "Engine/ECS/src/PhysicsComponent.cpp"
   "Engine/ECS/src/InputComponent.cpp"
   "Engine/ECS/src/Commands.cpp"
@@ -43,7 +45,7 @@ if (WITH_EDITOR)
   target_compile_definitions(breakout PUBLIC
   WITH_EDITOR
   CHECK_ERRORS
-  DRAW_DEBUG_HELPERS
+  # DRAW_DEBUG_HELPERS
   ENABLE_CHEATS
   )
 endif()

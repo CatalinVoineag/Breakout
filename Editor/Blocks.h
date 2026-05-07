@@ -100,4 +100,40 @@ public:
     return NewActor;
   }
 };
+
+class StrongYellowBlock : public Actor {
+public:
+  DECLARE_BLOCK_TYPE(StrongYellowBlock)
+  DEFAULT_BLOCK_CONSTRUCT(StrongYellowBlock)
+};
+
+class StrongRedBlock : public Actor {
+public:
+  DECLARE_BLOCK_TYPE(StrongRedBlock)
+  DEFAULT_BLOCK_CONSTRUCT(StrongRedBlock)
+};
+
+class CrackedYellowBlock : public Actor {
+public:
+  DECLARE_BLOCK_TYPE(CrackedYellowBlock)
+  DEFAULT_BLOCK_CONSTRUCT(CrackedYellowBlock)
+};
+
+class CrackedRedBlock : public Actor {
+public:
+  DECLARE_BLOCK_TYPE(CrackedRedBlock)
+  DEFAULT_BLOCK_CONSTRUCT(CrackedRedBlock)
+};
+
+class TNTRedBlock : public Actor {
+public:
+  DECLARE_BLOCK_TYPE(TNTRedBlock)
+  DEFAULT_BLOCK_CONSTRUCT(TNTRedBlock)
+};
+
+class TNTBlueBlock : public Actor {
+public:
+  DECLARE_BLOCK_TYPE(TNTBlueBlock)
+  DEFAULT_BLOCK_CONSTRUCT(TNTBlueBlock)
+};
 }

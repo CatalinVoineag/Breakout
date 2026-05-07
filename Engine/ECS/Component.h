@@ -4,6 +4,7 @@
 class Entity;
 class Scene;
 class AssetManager;
+class SoundAssetManager;
 struct Vec2;
 
 class Component {
@@ -12,7 +13,7 @@ class Component {
   virtual void Initialize() {}
   virtual void HandleEvent(const SDL_Event& E) {}
   virtual void Tick(float DeltaTime) {}
-  virtual void Render(SDL_Surface* Surface) {}
+  virtual void Render(SDL_Surface* Surface, float DeltaTime) {}
   virtual void DrawDebugHelpers(SDL_Surface* Surface) {}
   virtual ~Component() = default;
 
@@ -26,6 +27,7 @@ class Component {
   Entity* GetOwner() const { return Owner; }
   Scene& GetScene() const;
   AssetManager& GetAssetManager() const;
+  SoundAssetManager& GetSoundAssetManager() const;
   Vec2 GetOwnerPosition() const;
   void SetOwnerPosition(const Vec2& Pos) const;
 
