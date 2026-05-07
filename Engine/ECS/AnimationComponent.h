@@ -7,6 +7,7 @@
 #include "Component.h"
 #include "Config.h"
 #include "../AssetManager.h"
+#include "../Vec2.h"
 
 // Put this somewhere else?
 enum class AnimationScalingMode {
@@ -16,7 +17,14 @@ enum class AnimationScalingMode {
 class AnimationComponent : public Component {
   public:
     using Component::Component;
-    AnimationComponent(Entity* Owner, const std::string &FilePath, int SpriteFrames);
+    AnimationComponent(
+      Entity* Owner,
+      const std::string &FilePath,
+      int SpriteFrames,
+      int SpriteWidth,
+      int SpriteHeight,
+      Vec2 Offset
+    );
 
     void Render(SDL_Surface* Surface, float DeltaTime) override;
 
@@ -31,11 +39,11 @@ class AnimationComponent : public Component {
   private:
   std::string AnimationFilePath;
   std::shared_ptr<SDL_Surface> AnimationSurface{nullptr};
-  std::optional<float> Width{std::nullopt};
-  std::optional<float> Height{std::nullopt};
-  AnimationScalingMode ScaleMode{AnimationScalingMode::Fill};
   int SpriteSheetIndex{0};
-  int SpriteFrames{0};
+  int SpriteFrames;
+  int SpriteWidth{0};
+  int SpriteHeight{0};
+  Vec2 Offset{0, 0};
   float AnimationTime{.1f};
   float DeltaTimeCounter{0};
 };

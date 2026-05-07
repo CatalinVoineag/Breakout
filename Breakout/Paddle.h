@@ -41,9 +41,9 @@ class Paddle : public Entity {
         CollisionWidth,
         CollisionHeight
       );
-      ExplosionAnimation = AddComponent<AnimationComponent>(
-        "Assets/explosion.png", 13
-      );
+      // ExplosionAnimation = AddComponent<AnimationComponent>(
+      //   "Assets/explosion.png", 13
+      // );
 
       SetIsPaused(true);
     }
@@ -77,7 +77,7 @@ class Paddle : public Entity {
       ) {
         SetIsPaused(true);
       } else if (E.type == UserEvents::BLOCK_DESTROYED) {
-        ExplosionAnimation->Play=true;
+        // ExplosionAnimation->Play=true;
       }
     }
 
