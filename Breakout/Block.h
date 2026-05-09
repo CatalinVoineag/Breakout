@@ -98,6 +98,10 @@ class Block : public Entity {
       return static_cast<Config::ActorType>(Type) == Config::ActorType::TNTBlueBlock ||
         static_cast<Config::ActorType>(Type) == Config::ActorType::TNTRedBlock;
     }
+    
+    bool BallBlock() {
+      return static_cast<Config::ActorType>(Type) == Config::ActorType::BallGreenBlock;
+    }
 
     void Destroy() {
       Image->SetIsEnabled(false);
@@ -107,9 +111,21 @@ class Block : public Entity {
       if (IsTnt()) {
         ExplosionAnimation->Play = true;
         ExplosionSound->Play();
+
+        E.type = UserEvents::BLOCK_DESTROYED;
+        SDL_PushEvent(&E);
+
         E.type = UserEvents::BLOCK_EXPLODED;
         E.user.data1 = reinterpret_cast<void*>(static_cast<uintptr_t>(GridRow));
         E.user.data2 = reinterpret_cast<void*>(static_cast<uintptr_t>(GridCol));
+      } else if (BallBlock()) {
+        E.type = UserEvents::BLOCK_DESTROYED;
+        SDL_PushEvent(&E);
+
+        auto [TargetX, TargetY]{Transform->GetOwnerPosition()};// + Offset};
+        E.user.data1 = reinterpret_cast<void*>(static_cast<uintptr_t>(TargetX));
+        E.user.data2 = reinterpret_cast<void*>(static_cast<uintptr_t>(TargetY));
+        E.type = UserEvents::ADD_BALL;
       } else {
         E.type = UserEvents::BLOCK_DESTROYED;
       }
@@ -153,5 +169,6 @@ class Block : public Entity {
       {CrackedRedBlock, "Assets/Cracked_Brick_Red.png"},
       {TNTRedBlock, "Assets/TNT_Brick_Red.png"},
       {TNTBlueBlock, "Assets/TNT_Brick_Blue.png"},
+      {BallGreenBlock, "Assets/BALL_Brick_Green.png"},
     };
 };

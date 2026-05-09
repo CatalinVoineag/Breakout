@@ -86,3 +86,10 @@ TNTBlueBlock::TNTBlueBlock(
     ParentScene,
     SDL_Rect{Rect.x, Rect.y, WIDTH, HEIGHT},
     ParentScene.GetAssets().TNTBlueBlock} {}
+
+BallGreenBlock::BallGreenBlock(
+  Scene& ParentScene, SDL_Rect Rect)
+  : Actor{
+    ParentScene,
+    SDL_Rect{Rect.x, Rect.y, WIDTH, HEIGHT},
+    ParentScene.GetAssets().BallGreenBlock} {}

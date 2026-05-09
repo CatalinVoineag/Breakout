@@ -114,6 +114,17 @@ class ActorMenu {
         }
       )
     );
+
+    Actors.emplace_back(
+      std::make_unique<BallGreenBlock>(
+        GetScene(),
+        SDL_Rect{
+          ACTOR_MENU_POSITION_X + PADDING,
+          BlueBlock::HEIGHT * 9 + PADDING * 9,
+          0, 0
+        }
+      )
+    );
   }
 
   void HandleEvent(const SDL_Event& E) {

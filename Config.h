@@ -12,6 +12,8 @@ inline Uint32 SAVE_LEVEL{SDL_RegisterEvents(1)};
 inline Uint32 SAVE_AND_PLAY_LEVEL{SDL_RegisterEvents(1)};
 inline Uint32 LEVEL_EDIT{SDL_RegisterEvents(1)};
 #endif
+inline Uint32 ADD_BALL{SDL_RegisterEvents(1)};
+inline Uint32 REMOVE_BALL{SDL_RegisterEvents(1)};
 inline Uint32 BLOCK_DESTROYED{SDL_RegisterEvents(1)};
 inline Uint32 BLOCK_EXPLODED{SDL_RegisterEvents(1)};
 inline Uint32 GAME_WON{SDL_RegisterEvents(1)};
@@ -35,6 +37,7 @@ enum class ActorType : Uint8 {
   CrackedRedBlock = 10,
   TNTRedBlock = 11,
   TNTBlueBlock = 12,
+  BallGreenBlock = 13,
 };
 
 inline const std::vector BUTTON_COLORS{

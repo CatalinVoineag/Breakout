@@ -2,6 +2,59 @@
 #include "../../Engine/Vec2.h"
 #include "../Paddle.h"
 #include "../Block.h"
+#include "../BreakoutScene.h"
+
+Ball::Ball(
+    BreakoutScene& Scene,
+    bool Paused,
+    int Index,
+    std::optional<Vec2> Position
+    ) : Entity{Scene}, EntityIndex{Index} {
+  Transform = AddComponent<TransformComponent>();
+  if (Position) {
+    Transform->SetPosition(*Position);
+  } else {
+    Transform->SetPosition({
+      6.f * Scene::PIXELS_PER_METER,
+      6.f * Scene::PIXELS_PER_METER
+    });
+  } 
+  Transform->SetScale(0.05f);
+
+  Physics = AddComponent<PhysicsComponent>();
+  Physics->SetGravity({0.f, 0.f});
+  Physics->SetVelocity(
+    Vec2{1.f, 2.f}.Normalize() 
+    * Config::Breakout::BALL_SPEED
+    * Scene::PIXELS_PER_METER
+  );
+
+  Image = AddComponent<ImageComponent>("Assets/Grey.png");
+
+  Collision = AddComponent<CollisionComponent>();
+  Collision->SetSize(
+    Image->GetWidth(),
+    Image->GetHeight()
+  );
+  Sound = AddComponent<SoundComponent>("Assets/ball_collision.wav");
+
+  SetIsPaused(Paused);
+}
+
+void Ball::HandleEvent(const SDL_Event& E) {
+  if (
+    E.type == SDL_EVENT_KEY_DOWN &&
+    E.key.key == SDLK_SPACE &&
+    GetScene().GetState() == GameState::InProgress
+  ) {
+    SetIsPaused(false);
+  } else if (
+    E.type == UserEvents::GAME_WON ||
+    E.type == UserEvents::GAME_LOST
+  ) {
+    SetIsPaused(true);
+  }
+}
 
 void Ball::HandleCollision(Entity& Other) {
   if (!dynamic_cast<Block*>(&Other)) {
@@ -10,6 +63,7 @@ void Ball::HandleCollision(Entity& Other) {
   if (dynamic_cast<Paddle*>(&Other)) {
     return;
   }
+
   SDL_FRect Intersection;
   Collision->GetCollisionRectangle(
     *Other.GetComponent<CollisionComponent>(),

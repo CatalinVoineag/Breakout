@@ -174,7 +174,8 @@ std::unordered_map<ActorType, ActorLoaderFunc> ActorLoaders{
   {CrackedYellowBlock, CrackedYellowBlock::Construct},
   {CrackedRedBlock, CrackedRedBlock::Construct},
   {TNTRedBlock, TNTRedBlock::Construct},
-  {TNTBlueBlock, TNTBlueBlock::Construct}};
+  {TNTBlueBlock, TNTBlueBlock::Construct},
+  {BallGreenBlock, BallGreenBlock::Construct}};
 }
 
 void Level::Load() {
