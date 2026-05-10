@@ -20,14 +20,16 @@ class Paddle : public Entity {
       });
 
       Input = AddComponent<InputComponent>();
-      Input->BindKeyHeld(SDLK_LEFT, CreateMoveLeftCommand);
-      Input->BindKeyHeld(SDLK_RIGHT, CreateMoveRightCommand);
+      // Input->BindKeyHeld(SDLK_LEFT, CreateMoveLeftCommand);
+      // Input->BindKeyHeld(SDLK_RIGHT, CreateMoveRightCommand);
+      Input->UnbindKey(SDLK_LEFT);
+      Input->UnbindKey(SDLK_RIGHT);
       Input->UnbindKey(SDLK_SPACE);
 
-      ImageComponent* Paddle = AddComponent<ImageComponent>("Assets/Paddle.png");
+      PaddleImage = AddComponent<ImageComponent>("Assets/Paddle.png");
 
-      float CollisionWidth{Paddle->GetWidth()};
-      float CollisionHeight{Paddle->GetHeight()};
+      float CollisionWidth{PaddleImage->GetWidth()};
+      float CollisionHeight{PaddleImage->GetHeight()};
 
       Physics = AddComponent<PhysicsComponent>();
       Physics->SetGravity({0, 0});
@@ -57,14 +59,13 @@ class Paddle : public Entity {
         if (TimerID != 0) {
           SDL_RemoveTimer(TimerID);
         }
-        TimerID = SDL_AddTimer(500, &Paddle::EnableCollision, this);
+        TimerID = SDL_AddTimer(50, &Paddle::EnableCollision, this);
       } 
     }
 
     void HandleEvent(const SDL_Event& E) override {
-      if (
-        E.type == SDL_EVENT_KEY_DOWN &&
-        E.key.key == SDLK_SPACE &&
+      if ((E.type == SDL_EVENT_KEY_DOWN && E.key.key == SDLK_SPACE ||
+            E.type == SDL_EVENT_MOUSE_BUTTON_DOWN && E.button.button == SDL_BUTTON_LEFT) &&
         GetScene().GetState() == GameState::InProgress
       ) {
         SetIsPaused(false);
@@ -73,6 +74,11 @@ class Paddle : public Entity {
         E.type == UserEvents::GAME_LOST
       ) {
         SetIsPaused(true);
+      } else if (E.type == SDL_EVENT_MOUSE_MOTION && Physics->GetIsEnabled()) {
+        Transform->SetPosition({
+          E.motion.x - PaddleImage->GetWidth() / 2,
+          Transform->GetPosition().y,
+        });
       }
     }
 
@@ -87,6 +93,7 @@ class Paddle : public Entity {
   private:
     TransformComponent* Transform{nullptr};
     InputComponent* Input{nullptr};
+    ImageComponent* PaddleImage{nullptr};
     PhysicsComponent* Physics{nullptr};
     CollisionComponent* Collision{nullptr};
 

@@ -4,6 +4,7 @@
 #include "../Engine/ECS/TransformComponent.h"
 #include "../Engine/ECS/CollisionComponent.h"
 #include "Ball.h"
+#include "BreakoutScene.h"
 
 enum class WallPosition {
   Top, Bottom, Left, Right
@@ -11,8 +12,8 @@ enum class WallPosition {
 
 class Wall : public Entity {
  public:
-  Wall(WallPosition Position, Scene& Scene)
-    : Entity{Scene}, Position{Position} {
+  Wall(WallPosition Position, Scene& Scene, int Index)
+    : Entity{Scene}, Position{Position}, EntityIndex{Index} {
       TransformComponent* Transform{
         AddComponent<TransformComponent>()
       };
@@ -42,13 +43,25 @@ class Wall : public Entity {
     }
 
   void HandleCollision(Entity& Other) override {
-    if (dynamic_cast<Ball*>(&Other) && Position == WallPosition::Bottom) {
+    auto& GameScene = static_cast<BreakoutScene&>(GetScene());
+    Ball* BallPtr = dynamic_cast<Ball*>(&Other);
+
+    if (BallPtr && Position == WallPosition::Bottom) {
       SDL_Event E{};
-      E.type = UserEvents::GAME_LOST;
+
+      if (GameScene.GetBalls() > 1) {
+        E.type = UserEvents::REMOVE_BALL;
+        E.user.data1 = reinterpret_cast<void*>(static_cast<uintptr_t>(BallPtr->GetEntityIndex()));
+      } else {
+        E.type = UserEvents::GAME_LOST;
+      }
       SDL_PushEvent(&E);
     }
   }
 
+  int GetEntityIndex() const { return EntityIndex; } 
+
   private:
     WallPosition Position;
+    int EntityIndex;
 };

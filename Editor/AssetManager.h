@@ -15,5 +15,6 @@ struct AssetManager {
   Image CrackedRedBlock{"Assets/Cracked_Brick_Red.png" };
   Image TNTRedBlock{"Assets/TNT_Brick_Red.png" };
   Image TNTBlueBlock{"Assets/TNT_Brick_Blue.png"};
+  Image BallGreenBlock{"Assets/BALL_Brick_Green.png"};
 };
 }

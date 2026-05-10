@@ -8,16 +8,19 @@
 
 void BreakoutScene::Load(int Level) {
   Entities.clear();
-  Entities.emplace_back(std::make_unique<Ball>(*this));
+  Balls = 0;
+
+  Entities.emplace_back(std::make_unique<Ball>(*this, true, Entities.size(), std::nullopt));
+  Balls++;
   SoundEntity = std::make_unique<Entity>(*this);
   WinSound = SoundEntity->AddComponent<SoundComponent>("Assets/win.wav");
   Entities.emplace_back(std::move(SoundEntity));
 
   using enum WallPosition;
-  Entities.emplace_back(std::make_unique<Wall>(Top, *this));
-  Entities.emplace_back(std::make_unique<Wall>(Left, *this));
-  Entities.emplace_back(std::make_unique<Wall>(Bottom, *this));
-  Entities.emplace_back(std::make_unique<Wall>(Right, *this));
+  Entities.emplace_back(std::make_unique<Wall>(Top, *this, Entities.size()));
+  Entities.emplace_back(std::make_unique<Wall>(Left, *this, Entities.size()));
+  Entities.emplace_back(std::make_unique<Wall>(Bottom, *this, Entities.size()));
+  Entities.emplace_back(std::make_unique<Wall>(Right, *this, Entities.size()));
   Entities.emplace_back(std::make_unique<Paddle>(*this));
 
   std::string FileName{std::format("Assets/Level{}.bin", Level)};

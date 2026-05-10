@@ -1,7 +1,10 @@
 #pragma once
 #include <SDL3/SDL.h>
+#include <iostream>
 #include "../Engine/Scene.h"
 #include "../Engine/ECS/SoundComponent.h"
+#include "../Engine/Vec2.h"
+#include "Ball.h"
 
 class BreakoutScene : public Scene {
 public:
@@ -11,6 +14,9 @@ public:
     }
 
   void HandleEvent(const SDL_Event& E) override {
+    std::cout << "Blocks Remining " << BlocksRemaining << "\n";
+    std::cout << "BALLS " << Balls << "\n";
+
     Scene::HandleEvent(E);
     using namespace UserEvents;
     if (E.type == BLOCK_DESTROYED) {
@@ -28,7 +34,21 @@ public:
       CompleteLevel();
     }
 #endif
-    else if (E.type == LAUNCH_LEVEL) {
+    else if (E.type == ADD_BALL) {
+      Vec2 Position = {
+        static_cast<float>(reinterpret_cast<uintptr_t>(E.user.data1)),
+        static_cast<float>(reinterpret_cast<uintptr_t>(E.user.data2))
+      };
+      Entities.emplace_back(std::make_unique<Ball>(
+        *this, false, Entities.size(), Position
+      ));
+      Balls++;
+    } else if (E.type == REMOVE_BALL) {
+      Uint8 Index = static_cast<int>(reinterpret_cast<uintptr_t>(E.user.data1));
+      RemoveEntity(Index);
+      Balls--;
+    } else if (E.type == LAUNCH_LEVEL) {
+      Balls = 0;
       Load(E.user.code);
     } else if (E.type == GAME_WON) {
       SetState(GameState::Won);
@@ -69,7 +89,10 @@ public:
     Scene::Tick(DeltaTime);
   }
 
+  int GetBalls() const { return Balls; }
+
 private:
+  int Balls{0};
   int BlocksRemaining{0};
   int LoadedLevel{1};
   void Load(int Level);

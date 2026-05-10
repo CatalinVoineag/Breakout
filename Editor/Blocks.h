@@ -136,4 +136,11 @@ public:
   DECLARE_BLOCK_TYPE(TNTBlueBlock)
   DEFAULT_BLOCK_CONSTRUCT(TNTBlueBlock)
 };
+
+class BallGreenBlock : public Actor {
+public:
+  DECLARE_BLOCK_TYPE(BallGreenBlock)
+  DEFAULT_BLOCK_CONSTRUCT(BallGreenBlock)
+};
 }
+

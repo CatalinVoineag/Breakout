@@ -37,6 +37,10 @@ public:
     Entities.clear();
   }
 
+  void RemoveEntity(int Index) {
+    Entities.erase(Entities.begin() + Index);
+  }
+
 #ifdef DRAW_DEBUG_HELPERS
   SDL_Surface* Trajectories{nullptr};
 #endif
