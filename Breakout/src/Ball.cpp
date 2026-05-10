@@ -42,10 +42,9 @@ Ball::Ball(
 }
 
 void Ball::HandleEvent(const SDL_Event& E) {
-  if (
-    E.type == SDL_EVENT_KEY_DOWN &&
-    E.key.key == SDLK_SPACE &&
-    GetScene().GetState() == GameState::InProgress
+  if ((E.type == SDL_EVENT_KEY_DOWN && E.key.key == SDLK_SPACE ||
+        E.type == SDL_EVENT_MOUSE_BUTTON_DOWN && E.button.button == SDL_BUTTON_LEFT) &&
+      GetScene().GetState() == GameState::InProgress
   ) {
     SetIsPaused(false);
   } else if (
